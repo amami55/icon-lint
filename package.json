@@ -1,0 +1,50 @@
+{
+  "name": "icon-lint",
+  "version": "0.4.1",
+  "description": "Zero-config linter that infers an icon set's own conventions (viewBox, stroke, caps, joins, paint style) and flags the icons that drift from them",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amami55/icon-lint.git"
+  },
+  "homepage": "https://github.com/amami55/icon-lint#readme",
+  "bugs": {
+    "url": "https://github.com/amami55/icon-lint/issues"
+  },
+  "keywords": [
+    "svg",
+    "icons",
+    "svg-icons",
+    "icon-lint",
+    "linter",
+    "cli",
+    "design-system",
+    "consistency",
+    "icon-set",
+    "ai-agent",
+    "claude-code",
+    "codex"
+  ],
+  "license": "MIT",
+  "author": "Kohhei Mohri <harmonics8@gmail.com>",
+  "bin": {
+    "icon-lint": "bin/icon-lint.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node tests/run_fixtures.mjs"
+  },
+  "dependencies": {
+    "svg-path-bbox": "^2.1.0",
+    "svgpath": "^2.6.0",
+    "svgson": "^5.3.1"
+  }
+}
