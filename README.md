@@ -160,6 +160,12 @@ and report the primary findings. Exit 0 = consistent, 1 = review, 2 = error.
 Treat warnings as candidates, not confirmed bugs; intentional exceptions exist.
 ```
 
+## Related use cases
+
+If you are looking for an SVG icon consistency checker, an icon set linter, or a CLI to validate SVG icon sets in a design system, this is that tool. `icon-lint` detects inconsistent icon attributes — viewBox, stroke width, line caps and joins, paint style — across an icon library, so drift is caught in review or CI instead of shipping.
+
+It works on attributes and structure only. It does not measure visual similarity, pixel-level rendering, or subjective design quality, so it is not a "visual" or "pixel-perfect" checker.
+
 ## vs svglint / SVGO
 
 `svglint` checks hand-written fixed rules per file. `icon-lint` infers the set's conventions with zero config and flags drift from those conventions.
