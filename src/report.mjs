@@ -43,7 +43,7 @@ function severityRank(severity) {
 
 export function buildReport({ target, fileCount, icons, profile, findings, exitCode, ignoredFiles = 0 }) {
   const summary = { ...summarize(findings), ignored_files: ignoredFiles };
-  return { version: '0.4.1', target, files: fileCount, parsed: icons.length, set_profile: profile, findings, summary, exit_code: exitCode };
+  return { version: '0.4.2', target, files: fileCount, parsed: icons.length, set_profile: profile, findings, summary, exit_code: exitCode };
 }
 
 export function printReport(report, jsonOnly) {

@@ -1,6 +1,6 @@
 {
   "name": "icon-lint",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Zero-config linter that infers an icon set's own conventions (viewBox, stroke, caps, joins, paint style) and flags the icons that drift from them",
   "type": "module",
   "repository": {

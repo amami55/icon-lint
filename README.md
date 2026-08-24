@@ -14,7 +14,7 @@ It infers each set's own conventions — viewBox, stroke width, line caps and jo
 ```sh
 npx icon-lint ./icons
 npm i -D icon-lint
-icon-lint <dir> [--json] [--ignore <glob>] [--min-set N] [--z K] [--eps-ratio R]
+icon-lint <dir> [--json] [--ignore <glob>] [--min-set N] [--z K] [--eps-ratio R] [-h]
 ```
 
 ## Example Output
@@ -26,14 +26,14 @@ icon-lint /repo/icons
 files: 10, parsed: 9, ignored: 1
 errors: 0, warnings: 1, infos: 0
 WARNING warning.svg stroke-width-outlier: stroke width 2.25 differs from set profile
-{"version":"0.4.1","target":"/repo/icons","files":9,"parsed":9,"set_profile":{},"findings":[],"summary":{"errors":0,"warnings":1,"infos":0,"ignored_files":1},"exit_code":1}
+{"version":"0.4.2","target":"/repo/icons","files":9,"parsed":9,"set_profile":{},"findings":[],"summary":{"errors":0,"warnings":1,"infos":0,"ignored_files":1},"exit_code":1}
 ```
 
 JSON output:
 
 ```json
 {
-  "version": "0.4.1",
+  "version": "0.4.2",
   "target": "/repo/icons",
   "files": 9,
   "parsed": 9,

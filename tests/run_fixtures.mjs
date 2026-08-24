@@ -21,6 +21,10 @@ function run(dir, args = []) {
   return spawnSync(process.execPath, [BIN, dir, ...args], { encoding: 'utf8', timeout: 30000 });
 }
 
+function runArgs(args = []) {
+  return spawnSync(process.execPath, [BIN, ...args], { encoding: 'utf8', timeout: 30000 });
+}
+
 async function snapshot(dir) {
   const out = new Map();
   async function walk(d) {
@@ -74,6 +78,15 @@ async function main() {
     let after = await snapshot(okDir);
     check('normal set exits 0', r.status === 0, r.stderr || r.stdout);
     check('target dir byte-identical after run', before === after);
+
+    r = runArgs(['--help']);
+    check('--help exits 0 and prints help sections', r.status === 0 && r.stdout.includes('Usage:') && r.stdout.includes('Exit codes:'), r.stdout || r.stderr);
+    r = runArgs(['-h']);
+    check('-h exits 0 and prints help sections', r.status === 0 && r.stdout.includes('Usage:') && r.stdout.includes('Exit codes:'), r.stdout || r.stderr);
+    r = run(okDir, ['--help', '--json']);
+    check('--help with dir and json does not run lint', r.status === 0 && !r.stdout.trimStart().startsWith('{"version"') && !r.stdout.includes('"findings"'), r.stdout || r.stderr);
+    r = runArgs(['--nope']);
+    check('unknown option exits 2', r.status === 2, r.stdout || r.stderr);
 
     const cases = {
       'stroke-width-outlier': outline(rectEl('stroke-width="2.25"')),

@@ -13,6 +13,27 @@ const rules = [viewbox, strokeWidth, linecapLinejoin, paintStyle];
 
 class UsageError extends Error {}
 
+const HELP_TEXT = `icon-lint — find SVG icons that drift from the conventions of their own icon set.
+
+Usage:
+  icon-lint <dir> [options]
+
+Options:
+  --json             Output a single JSON report to stdout (default: human-readable)
+  --ignore <glob>    Exclude files, path relative to <dir>; repeatable
+  --min-set <N>      Minimum set size before warnings apply; below it, findings become info (default: 8)
+  --z <K>            Modified z-score threshold for numeric outliers (default: 3.5)
+  --eps-ratio <R>    Relative tolerance used when the set has zero spread (default: 0.02)
+  -h, --help         Show this help and exit
+
+Exit codes:
+  0  consistent (no warning or error findings)
+  1  findings to review (warnings or errors)
+  2  execution error (bad arguments, missing directory, or no SVG files)
+
+Example:
+  npx icon-lint ./icons --json`;
+
 function parseArgs(argv) {
   const opts = { json: false, ignore: [], minSet: 8, z: 3.5, epsRatio: 0.02 };
   const pos = [];
@@ -35,7 +56,12 @@ function parseArgs(argv) {
 }
 
 try {
-  const { dir, opts } = parseArgs(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+  if (argv.includes('--help') || argv.includes('-h')) {
+    console.log(HELP_TEXT);
+    process.exit(0);
+  }
+  const { dir, opts } = parseArgs(argv);
   const target = path.resolve(dir);
   const st = await stat(target).catch(() => null);
   if (!st?.isDirectory()) throw new UsageError(`dir not found: ${target}`);
@@ -69,7 +95,7 @@ try {
   process.exit(exitCode);
 } catch (e) {
   if (process.argv.includes('--json')) {
-    console.log(JSON.stringify({ version: '0.4.1', target: null, files: 0, parsed: 0, set_profile: {}, findings: [], summary: { errors: 1, warnings: 0, infos: 0, ignored_files: 0 }, exit_code: 2, error: e.message }));
+    console.log(JSON.stringify({ version: '0.4.2', target: null, files: 0, parsed: 0, set_profile: {}, findings: [], summary: { errors: 1, warnings: 0, infos: 0, ignored_files: 0 }, exit_code: 2, error: e.message }));
   } else {
     console.error(e.message);
   }
